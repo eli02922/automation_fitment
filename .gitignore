@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.next/
+.env
+*.log
+coverage/
+k8s/secret.yaml

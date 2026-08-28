@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fitment-frontend
+  namespace: fitment-catalog
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: fitment-frontend
+  template:
+    metadata:
+      labels:
+        app: fitment-frontend
+    spec:
+      containers:
+        - name: fitment-frontend
+          image: ghcr.io/your-org/fitment-catalog-frontend:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NEXT_PUBLIC_API_BASE_URL
+              value: "https://api.fitment-catalog.example.com/api/v1"
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fitment-frontend-service
+  namespace: fitment-catalog
+spec:
+  selector:
+    app: fitment-frontend
+  ports:
+    - port: 80
+      targetPort: 3000
+  type: ClusterIP

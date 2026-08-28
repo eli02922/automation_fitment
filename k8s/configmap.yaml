@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fitment-backend-config
+  namespace: fitment-catalog
+data:
+  NODE_ENV: "production"
+  PORT: "4000"
+  DB_DIALECT: "mssql"
+  DB_HOST: "sqlserver-service"
+  DB_PORT: "1433"
+  DB_NAME: "fitment_catalog"
+  DB_ENCRYPT: "true"
+  KAFKA_BROKERS: "kafka-service:9092"
+  KAFKA_FITMENT_TOPIC: "fitment.events"
+  ETL_CRON_SCHEDULE: "0 */2 * * *"
